@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
       onChanged();
     }
     );
-    current();
+    currentLocation();
     super.initState();
   }
   @override
@@ -74,9 +74,7 @@ class _HomeState extends State<Home> {
                   mapController = controller;
                 });
               },
-            ),
-
-                 
+            ),                
                   Padding(
                     padding:  EdgeInsets.only(right:24.w,left: 24.w,top: 50.h),
                     child: Card(
@@ -105,9 +103,16 @@ class _HomeState extends State<Home> {
                                   maxLines: 1,
                                   
                                   onTap: () {
-                                    setState(() {
+                                    if(isShow!=true){
+                                      setState(() {
                                       isShow=true;
                                     });
+                                    }else{
+                                      setState(() {
+                                      isShow=false;
+                                    });
+                                    }
+                                    
                                   },
                                   controller: searchController ,
                                   keyboardType: TextInputType.text,
@@ -129,12 +134,19 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
+                            // InkWell(
+                            //   onTap: () {
+                            //     setState(() {
+                            //       isShow=false;
+                            //     getNearBylocation(searchController.text);
+                            //     });
+                            //   },
+                            //   child: Icon(Icons.search,))
                           ],
                         )
                       ),
                     ),
                   ),
-
                   Padding(
                     padding:  EdgeInsets.only(left: 24.w,top: 120.h),
                     child: Container(
@@ -146,7 +158,7 @@ class _HomeState extends State<Home> {
                             InkWell(
                               onTap: () {
                                 setState(() => markers.clear(),);
-                                current();
+                                currentLocation();
                                 getNearBylocation('Soccer court');
                               },
                               child: Card(
@@ -178,7 +190,7 @@ class _HomeState extends State<Home> {
                             InkWell(
                               onTap: () {
                                 setState(() => markers.clear(),);
-                                current();
+                                currentLocation();
                                  getNearBylocation('Tennis court');
                               },
                               child: Card(
@@ -210,7 +222,7 @@ class _HomeState extends State<Home> {
                             InkWell(
                               onTap: () {
                                 setState(() => markers.clear(),);
-                                current();
+                                currentLocation();
                                 getNearBylocation('Gym');
                               },
                               child: Card(
@@ -242,7 +254,7 @@ class _HomeState extends State<Home> {
                             InkWell(
                               onTap:() {
                                 setState(() => markers.clear(),);
-                                current();
+                                currentLocation();
                                 getNearBylocation('Basketball Court');
                               }, 
                               child: Card(
@@ -274,7 +286,7 @@ class _HomeState extends State<Home> {
                             InkWell(
                               onTap: () {
                                 setState(() => markers.clear(),);
-                                current();
+                                currentLocation();
                                 getNearBylocation('Paddle Court');
                               },
                               child: Card(
@@ -316,7 +328,7 @@ class _HomeState extends State<Home> {
               backgroundColor: whiteContainer,
 
               onPressed: () async {
-                current();
+                currentLocation();
                 setState(() {
                   
                 });
@@ -327,10 +339,12 @@ class _HomeState extends State<Home> {
                   isShow
                     ? Padding(
                         padding:
-                            EdgeInsets.only(left: 25.w, top: 100.h, right: 25.w),
+                            EdgeInsets.only(left: 25.w, top: 110.h, right: 25.w),
                         child: Card(
                           elevation: 3,
-                          child: Expanded(
+                          child: SizedBox(
+                            height: 500.h,
+                            width: 377.w,
                             child: Container(
                                 color: whiteContainer,
                                 // height: 500,
@@ -349,13 +363,14 @@ class _HomeState extends State<Home> {
                                           searchController.text=_placesList[index]
                                                       ['description'];
                                           
-                                               print(updateLocation.latitude+updateLocation.longitude);
+                                               
                                       
-
+                                          
                                           setState(() {
                                            markers.clear();
-                                          
-                                           
+                                            
+                                           getNearBylocation(_placesList[index]
+                                                      ['description']);
 
                                             isShow = false;
                                             updateLocation = LatLng(
@@ -381,7 +396,7 @@ class _HomeState extends State<Home> {
               ), 
     );
   }
-  void current() async {
+  void currentLocation() async {
     getLocation().then((value) async {
       debugPrint('' + value.latitude.toString());
       setState(() {
@@ -428,17 +443,8 @@ class _HomeState extends State<Home> {
     var response = await http.get(Uri.parse(request),);
     // var data=response.body.toString()
     var result=jsonDecode(response.body);
-  
-    
-     print("........................{aaaa}.....................");
-     Map<String, dynamic> map = jsonDecode(response.body.toString());
-    
-        list = [];
-        list.clear();
 
-        // list = (map['data']).map((e) => Data.fromJson(e)).toList();
          nearbyPlacesResponse = NearbyPlacesResponse.fromJson(jsonDecode(response.body));
-    print("........................nnnn.....................");
       print(nearbyPlacesResponse.results![0].name);
     for(int i=0;i<nearbyPlacesResponse.results!.length; i++){
       double latitude=nearbyPlacesResponse.results![i].geometry!.location!.lat!.toDouble();
