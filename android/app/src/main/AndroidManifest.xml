@@ -3,11 +3,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
    <application
-        android:label="fitness_finder"
+        android:label="Fitness Finder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBiS0b4wnwsu7EQ2OQyNuZbyUkBuWWf1sM"/>
+               android:value="AIzaSyADkvRlbXAyEF6ZGnh1AMOF4qEnydfc5NY"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
