@@ -11,7 +11,7 @@ class DetailScreen extends StatelessWidget{
   String rating;
   String address;
   String time;
-  String icon;
+  // String icon;
 
   DetailScreen({
     required this.name,
@@ -19,7 +19,7 @@ class DetailScreen extends StatelessWidget{
     required this.address,
     required this.time,
     required this.ratingtotal,
-    required this.icon,
+    // required this.icon,
   });
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class DetailScreen extends StatelessWidget{
             children: [
               Icon(Icons.timelapse_sharp,size: 30,),
               SizedBox(width: 15.w,),
-              Text(time,style: TextStyle(
+              Text("Open Now:"+time,style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.normal
             ),)

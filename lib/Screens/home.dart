@@ -452,13 +452,14 @@ class _HomeState extends State<Home> {
       print(latitude+longitude);
       markers.add( Marker(
         onTap: () {
+          print(nearbyPlacesResponse.results![i].openingHours!.openNow);
           Get.to(()=>DetailScreen(
             address:nearbyPlacesResponse.results![i].vicinity.toString(),
-            icon:nearbyPlacesResponse.results![i].icon.toString(),
+            // icon:nearbyPlacesResponse.results![i].icon.toString(),
             name: nearbyPlacesResponse.results![i].name.toString(),
             rating: nearbyPlacesResponse.results![i].rating.toString(),
             ratingtotal: nearbyPlacesResponse.results![i].userRatingsTotal.toString(),
-            time: nearbyPlacesResponse.results![i].openingHours.toString(),
+            time: nearbyPlacesResponse.results![i].openingHours!.openNow.toString(),
             ));
         },
     markerId: MarkerId(nearbyPlacesResponse.results![i].placeId.toString()),
