@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
  List<dynamic> _placesList = [];
  var uuid = Uuid();
  String _sessionToken = '1233';
- String googleAPiKey = "AIzaSyADkvRlbXAyEF6ZGnh1AMOF4qEnydfc5NY";
+ String googleAPiKey = "";
   LatLng startLocation = LatLng(0, 0);
   LatLng updateLocation = LatLng(0, 0);
   String startlan= '';
